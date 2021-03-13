@@ -41,20 +41,57 @@ def scan(input, output):
         for element in insecure_http:
             if element.startswith("HTTP"):
                 dict[line]["insecure_http"] = True
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
+
+
+
+def get_redirect_to(url):
+    #https://stackoverflow.com/questions/33684356/how-to-capture-the-output-of-openssl-in-python
+    lst = openssl_get_header(url)
+    if lst != None:
+        if int(lst[0][9:11]) == 301:
+            return True
+        else:
+            return False
+    else:
+        return None
+
+def get_hst(url):
+    lst = openssl_get_header(url)
+    if lst != None:
+        result = False
+        for h in lst:
+            if h.split(": ")[0] == "Strict-Transport-Security":
+                result = h.split(": ")[1]
+                result = True
+                break
+        return result
+    else:
+        return None
+
+def get_tls_version(url):
+    return []
+
+
+def openssl_get_header(url):
+    try:
+        req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", url+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
+        output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
+        print(output)
+        return output
+    except Exception as e:
+        print(e)
+        return None
+
+def openssl_get_TLSv1_3(url):
+    try:
+        req = subprocess.Popen(["openssl", "s_client", "-tls1_3", "-connect", url+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = req.communicate(timeout=2)
+        output = output.decode(errors='ignore')
+        print(output)
+        return output
+    except Exception as e:
+        print(e)
+        return None
