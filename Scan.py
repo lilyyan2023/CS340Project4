@@ -10,15 +10,15 @@ def scan(input, output):
     f = open(input, "r")
     for line in f.readlines():
         dict[line] = {}
-        #get_scan_time(line)
+        get_scan_time(line)
         #get_ipv4_addresses(line)
         #get_ipv6_addresses(line)
         #get_http_server(line)
         #check_insecure_http(line)
-        get_redirect_to(line)
+        #get_redirect_to(line)
         get_hst(line)
-        get_tls_version(line)
-        get_ca(line)
+        #get_tls_version(line)
+        #get_ca(line)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
