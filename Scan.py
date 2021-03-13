@@ -3,6 +3,7 @@ import time
 import subprocess
 import re
 import requests
+import sys
 #import http
 dict = {}
 def scan(input, output):
@@ -183,3 +184,5 @@ def openssl_get_ca(url):
     except Exception as e:
         print(e)
         return None
+
+scan(sys.argv[1], sys.argv[2])
