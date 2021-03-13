@@ -97,7 +97,8 @@ def get_hst(url):
                 if h.split(": ")[0] == "Location":
                     location = h.split(": ")[1]
                     break
-            location = location.split("://")[1]
+            if "://" in location:
+                location = location.split("://")[1]
             if location[-1] == "/":
                 location = location[0:len(location)-1]
             lst = openssl_get_header(location)
@@ -132,7 +133,6 @@ def openssl_get_header(url):
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", root+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
         output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
-        print(output)
         return output
     except subprocess.TimeoutExpired:
         return None
