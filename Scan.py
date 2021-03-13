@@ -9,6 +9,7 @@ dict = {}
 def scan(input, output):
     f = open(input, "r")
     for line in f.readlines():
+        print(line)
         dict[line] = {}
         get_scan_time(line)
         #get_ipv4_addresses(line)
@@ -129,6 +130,7 @@ def openssl_get_header(url):
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", url+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
         output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
+        print(otuput)
         return output
     except subprocess.TimeoutExpired:
         return None
