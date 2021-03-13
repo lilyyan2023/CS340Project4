@@ -97,6 +97,8 @@ def get_hst(url):
                 if h.split(": ")[0] == "Location":
                     location = h.split(": ")[1]
                     break
+            if location == "":
+                break
             if "://" in location:
                 location = location.split("://")[1]
             print(location)
