@@ -99,6 +99,7 @@ def get_hst(url):
                     break
             if "://" in location:
                 location = location.split("://")[1]
+            print(location)
             if location[-1] == "/":
                 location = location[0:len(location)-1]
             lst = openssl_get_header(location)
