@@ -18,9 +18,9 @@ def scan(input, output):
         #get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
-        get_hst(url)
-        #get_tls_version(url)
-        #get_ca(url)
+        #get_hst(url)
+        get_tls_version(url)
+        get_ca(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -132,6 +132,7 @@ def get_ca(url):
 
 def openssl_get_header(url):
     try:
+        print(url)
         root = url.split("/")[0]
         print(root)
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", root+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
