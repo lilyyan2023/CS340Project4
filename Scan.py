@@ -45,7 +45,8 @@ def get_ipv4_addresses(url):
             for ipv4_add in ipv4_adds:
                 if ipv4_add.startswith("Address:"):
                     ipv4_true_add = ipv4_add.split(" ")[1]
-                    dict[url]["ipv4_addresses"].append(ipv4_true_add)
+                    if ipv4_true_add not in dict[url]["ipv4_addresses"]:
+                        dict[url]["ipv4_addresses"].append(ipv4_true_add)
     except Exception as e:
         print(e)
 
@@ -64,7 +65,8 @@ def get_ipv6_addresses(url):
             for ipv6_add in ipv6_adds:
                 if ipv6_add.startswith("Address:"):
                     ipv6_true_add = ipv6_add.split(" ")[1]
-                    dict[url]["ipv6_addresses"].append(ipv6_true_add)
+                    if ipv6_true_add not in dict[url]["ipv6_addresses"]:
+                        dict[url]["ipv6_addresses"].append(ipv6_true_add)
     except Exception as e:
         print(e)
 
