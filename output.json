@@ -1,0 +1,170 @@
+{
+    "amazon.com": {
+        "hsts": [],
+        "root_ca": "\"VeriSign",
+        "scan_time": 1615675855.1557422
+    },
+    "asee.org": {
+        "hsts": [],
+        "root_ca": "Comodo CA Limited",
+        "scan_time": 1615675906.716376
+    },
+    "auditoryneuroscience.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Digital Signature Trust Co.",
+        "scan_time": 1615675895.558748
+    },
+    "clocktab.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Baltimore",
+        "scan_time": 1615675894.887314
+    },
+    "en.wikipedia.org": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Digital Signature Trust Co.",
+        "scan_time": 1615675850.6021948
+    },
+    "facebook.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675854.5338013
+    },
+    "fandom.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "GlobalSign nv-sa",
+        "scan_time": 1615675858.825906
+    },
+    "gradeinflation.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Digital Signature Trust Co.",
+        "scan_time": 1615675908.9027522
+    },
+    "illinois.edu": {
+        "hsts": [],
+        "root_ca": "Comodo CA Limited",
+        "scan_time": 1615675887.6746135
+    },
+    "imdb.com": {
+        "hsts": [],
+        "root_ca": "\"Starfield Technologies",
+        "scan_time": 1615675857.058295
+    },
+    "instagram.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675870.568591
+    },
+    "it.eecs.northwestern.edu": {
+        "hsts": [],
+        "root_ca": "Northwestern University",
+        "scan_time": 1615675883.1804883
+    },
+    "kellogg.northwestern.edu": {
+        "hsts": [],
+        "root_ca": "Comodo CA Limited",
+        "scan_time": 1615675882.0408459
+    },
+    "kli.org": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Baltimore",
+        "scan_time": 1615675914.9065604
+    },
+    "mccormick.northwestern.edu": {
+        "hsts": [],
+        "root_ca": "Comodo CA Limited",
+        "scan_time": 1615675881.3565574
+    },
+    "northwestern.edu": {
+        "hsts": [],
+        "root_ca": "COMODO CA Limited",
+        "scan_time": 1615675877.6826763
+    },
+    "pinterest.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675859.2983675
+    },
+    "pmichaud.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "Comodo CA Limited",
+        "scan_time": 1615675912.355622
+    },
+    "reddit.com": {
+        "hsts": [],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675856.5248957
+    },
+    "spacejam.com": {
+        "hsts": [],
+        "root_ca": "GlobalSign",
+        "scan_time": 1615675910.0898921
+    },
+    "stevetarzia.com": {
+        "hsts": [],
+        "root_ca": "Digital Signature Trust Co.",
+        "scan_time": 1615675888.9614887
+    },
+    "tripadvisor.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "GlobalSign",
+        "scan_time": 1615675859.8141937
+    },
+    "twitter.com": {
+        "hsts": [],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675851.9453564
+    },
+    "uchicago.edu": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "The USERTRUST Network",
+        "scan_time": 1615675885.3366668
+    },
+    "users.cs.northwestern.edu": {
+        "hsts": [],
+        "root_ca": "The USERTRUST Network",
+        "scan_time": 1615675882.5418742
+    },
+    "walmart.com": {
+        "hsts": [],
+        "root_ca": "GlobalSign",
+        "scan_time": 1615675874.8524623
+    },
+    "yelp.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "DigiCert Inc",
+        "scan_time": 1615675855.943394
+    },
+    "youtube.com": {
+        "hsts": [
+            "TLSv1.3"
+        ],
+        "root_ca": "GlobalSign",
+        "scan_time": 1615675849.8544974
+    }
+}

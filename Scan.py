@@ -15,14 +15,14 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         get_scan_time(url)
-        #get_ipv4_addresses(url)
+        get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
         #get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
         #get_hst(url)
-        get_tls_version(url)
-        get_ca(url)
+        #get_tls_version(url)
+        #get_ca(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -122,7 +122,7 @@ def get_tls_version(url):
     result = []
     tls = nmap_get_TLS(url)
     if tls != None:
-        result = []
+        result = tls
     if openssl_get_TLSv1_3(url):
         result.append("TLSv1.3")
     dict[url]["hsts"] = result
