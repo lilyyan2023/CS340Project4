@@ -238,13 +238,18 @@ def get_rdns_names(url, ipv4_add):
                     i += 1
                 j = 0
                 while j < len(rdns_list):
-                    print(rdns_list[j].startswith(";;"))
                     if rdns_list[j].startswith(";;"):
                         rdns_list = rdns_list[:j - 1]
                     j += 1
-                for element in rdns_list:
-                    rdns_name = element.split("\t")[2][:-1]
-                    dict[url]["rdns_names:"].append(rdns_name)
+                for line in rdns_list:
+                    rdns_element = line.split("\t")
+                    k = 0
+                    while k < len(rdns_element):
+                        if rdns_element[k] == "PTR":
+                            rdns_name = rdns_element[k + 1][:-1]
+                            dict[url]["rdns_names:"].append(rdns_name)
+                        k += 1
+                   
     except Exception as e:
         print(e, file=sys.stderr)
 
