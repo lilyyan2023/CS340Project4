@@ -17,12 +17,13 @@ def scan(input, output):
         get_scan_time(url)
         #get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
-        get_http_server(url)
+        #get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
         #get_hst(url)
         #get_tls_version(url)
         #get_ca(url)
+        
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
