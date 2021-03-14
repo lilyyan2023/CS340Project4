@@ -48,7 +48,7 @@ def get_ipv4_addresses(url):
                     if ipv4_true_add not in dict[url]["ipv4_addresses"]:
                         dict[url]["ipv4_addresses"].append(ipv4_true_add)
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
 
 
 def get_ipv6_addresses(url):
@@ -68,7 +68,7 @@ def get_ipv6_addresses(url):
                     if ipv6_true_add not in dict[url]["ipv6_addresses"]:
                         dict[url]["ipv6_addresses"].append(ipv6_true_add)
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
 
 def get_http_server(url):
     global dict
@@ -89,7 +89,7 @@ def check_insecure_http(url):
             if element.startswith("HTTP"):
                 dict[url]["insecure_http"] = True
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
 
 def get_redirect_to(url):
     global dict
@@ -157,9 +157,10 @@ def openssl_get_header(url):
         print(output)
         return output
     except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
         return None
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
         return None
 
 def nmap_get_TLS(url):
@@ -175,9 +176,10 @@ def nmap_get_TLS(url):
                 result.append(h.strip().split(":")[0])
         return result
     except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
         return None
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
         return None
 
 def openssl_get_TLSv1_3(url):
@@ -190,9 +192,10 @@ def openssl_get_TLSv1_3(url):
         else:
             return False
     except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
         return None
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
         return None
 
 def openssl_get_ca(url):
@@ -206,9 +209,10 @@ def openssl_get_ca(url):
                 return result
         return None
     except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
         return None
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
         return None
 
 def get_rdns_names(url, ipv4_add):
@@ -236,7 +240,7 @@ def get_rdns_names(url, ipv4_add):
                 rdns_name = element.split("\t")[2][:-1]
                 dict[url]["rdns_names:"].append(rdns_name)
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
 
 
 def get_rtt_value(ipv4_add):
@@ -250,7 +254,7 @@ def get_rtt_value(ipv4_add):
                     return element.split("\t")[1]
 
         except Exception as e:
-            print(e)
+            print(e, file=sys.stderr)
             return None
 
 def get_geo_location(ipv4_add):
