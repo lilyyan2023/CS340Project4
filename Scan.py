@@ -225,25 +225,26 @@ def get_rdns_names(url, ipv4_add):
     dict[url]["rdns_names:"] = []
     # extract ipv4_add from part B
     try:
-        rdns_result = subprocess.check_output(["dig", "-x", ipv4_add],
-                                                       timeout=5, stderr=subprocess.STDOUT).decode("utf-8")
-        rdns_list = rdns_result.split("\n")
-        if ";; ANSWER SECTION:" in rdns_list:
-            i = 0
-            while i < len(rdns_list):
-                if rdns_list[i] == ";; ANSWER SECTION:":
-                    start = i
-                    rdns_list = rdns_list[start + 1::]
-                i += 1
-            j = 0
-            while j < len(rdns_list):
-                print(rdns_list[j].startswith(";;"))
-                if rdns_list[j].startswith(";;"):
-                    rdns_list = rdns_list[:j - 1]
-                j += 1
-            for element in rdns_list:
-                rdns_name = element.split("\t")[2][:-1]
-                dict[url]["rdns_names:"].append(rdns_name)
+        for ipv4_add in dict[url]["ipv4_addresses"]:
+            rdns_result = subprocess.check_output(["dig", "-x", ipv4_add],
+                                                           timeout=5, stderr=subprocess.STDOUT).decode("utf-8")
+            rdns_list = rdns_result.split("\n")
+            if ";; ANSWER SECTION:" in rdns_list:
+                i = 0
+                while i < len(rdns_list):
+                    if rdns_list[i] == ";; ANSWER SECTION:":
+                        start = i
+                        rdns_list = rdns_list[start + 1::]
+                    i += 1
+                j = 0
+                while j < len(rdns_list):
+                    print(rdns_list[j].startswith(";;"))
+                    if rdns_list[j].startswith(";;"):
+                        rdns_list = rdns_list[:j - 1]
+                    j += 1
+                for element in rdns_list:
+                    rdns_name = element.split("\t")[2][:-1]
+                    dict[url]["rdns_names:"].append(rdns_name)
     except Exception as e:
         print(e, file=sys.stderr)
 
