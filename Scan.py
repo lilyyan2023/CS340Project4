@@ -72,12 +72,14 @@ def get_ipv6_addresses(url):
 
 def get_http_server(url):
     global dict
-
-    r = requests.get("http://"+url)
-    if 'server' in r.headers:
-        dict[url]["http_server"] = r.headers['server']
-    else:
-        dict[url]["http_server"] = None
+    try:
+        r = requests.get("http://"+url, timeout=5)
+        if 'server' in r.headers:
+            dict[url]["http_server"] = r.headers['server']
+        else:
+            dict[url]["http_server"] = None
+    except Exception as e:
+        print(e, file=sys.stderr)
 
 
 def check_insecure_http(url):
