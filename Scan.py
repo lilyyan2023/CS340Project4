@@ -3,7 +3,8 @@ import time
 import subprocess
 import re
 import requests
-#import http
+import maxminddb
+
 dict = {}
 def scan(input, output):
     # dict = {}
@@ -12,6 +13,7 @@ def scan(input, output):
     #               "91.239.100.100", "185.228.168.168", "77.88.8.7", "156.154.70.1", "198.101.242.72",
     #               "176.103.130.130"]
     for line in f.readlines():
+        pass
       #   dict[line] = {"scan_time": time.time()}
       #   dict[line]["ipv4_addresses"] = []
       #   dict[line]["ipv6_addresses"] = []
@@ -42,6 +44,7 @@ def scan(input, output):
       #   for element in insecure_http:
       #       if element.startswith("HTTP"):
       #           dict[line]["insecure_http"] = True
+
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -145,4 +148,63 @@ def openssl_get_TLSv1_3(url):
     except Exception as e:
         print(e)
         return None
+
+def get_rdns_names(url, ipv4_add):
+    global dict
+    dict[url]["rdns_names:"] = []
+    # extract ipv4_add from part B
+    rdns_result = subprocess.check_output(["dig", "-x", ipv4_add],
+                                                   timeout=2, stderr=subprocess.STDOUT).decode("utf-8")
+    rdns_list = rdns_result.split("\n")
+    if ";; ANSWER SECTION:" in rdns_list:
+        i = 0
+        while i < len(rdns_list):
+            if rdns_list[i] == ";; ANSWER SECTION:":
+                start = i
+                rdns_list = rdns_list[start + 1::]
+            i += 1
+        j = 0
+        while j < len(rdns_list):
+            print(rdns_list[j].startswith(";;"))
+            if rdns_list[j].startswith(";;"):
+                rdns_list = rdns_list[:j - 1]
+            j += 1
+        for element in rdns_list:
+            rdns_name = element.split("\t")[2][:-1]
+            dict[url]["rdns_names:"].append(rdns_name)
+
+def get_rtt_value(ipv4_add):
+    # return one single rtt value
+        try:
+            rtt_result = subprocess.check_output(["sh", "-c",
+                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '"''']
+                                          , timeout = 2, stderr = subprocess.STDOUT).decode("utf-8")
+            for element in rtt_result.split("\n"):
+                if element.startswith("real"):
+                    return element.split("\t")[1]
+
+        except Exception as e:
+            print(e)
+            return None
+
+def get_geo_location(ipv4_add):
+    # return single geo_location, need to remove duplicate in result list
+    reader = maxminddb.open_database('GeoLite2-City.mmdb')
+    geo_locations_result = reader.get(ipv4_add)
+    if 'subdivisions' in geo_locations_result and 'city' in geo_locations_result:
+         geo_location = [geo_locations_result['city']['names']['en'],
+                         geo_locations_result['subdivisions']['names']['en'],
+                         geo_locations_result['country']['names']['en']]
+    elif 'subdivision' in geo_locations_result:
+        geo_location = [geo_locations_result['subdivisions']['names']['en'],
+                        geo_locations_result['country']['names']['en']]
+    else:
+        geo_location = [geo_locations_result['country']['names']['en']]
+    return geo_location
+
+
+
+
+
+
 
