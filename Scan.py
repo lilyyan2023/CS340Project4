@@ -39,12 +39,13 @@ def get_ipv4_addresses(url):
                   "176.103.130.130"]
     for dns in public_dns:
         ipv4_add_result = subprocess.check_output(["nslookup", "-type=A", url, dns],
-                                                  timeout=2, stderr=subprocess.STDOUT).decode("utf-8")
+                                                      timeout=2, stderr=subprocess.STDOUT).decode("utf-8")
         ipv4_adds = ipv4_add_result.split("\n")[2:]
         for ipv4_add in ipv4_adds:
             if ipv4_add.startswith("Address:"):
-                ipv4_true_add = ipv4_add.split("\t")[1]
+                ipv4_true_add = ipv4_add.split(" ")[1]
                 dict[url]["ipv4_addresses"].append(ipv4_true_add)
+
 def get_ipv6_addresses(url):
     global dict
     dict[url]["ipv6_addresses"] = []
@@ -57,7 +58,7 @@ def get_ipv6_addresses(url):
         ipv6_adds = ipv6_add_result.split("\n")[2:]
         for ipv6_add in ipv6_adds:
             if ipv6_add.startswith("Address:"):
-                ipv6_true_add = ipv6_add.split("\t")[1]
+                ipv6_true_add = ipv6_add.split(" ")[1]
                 dict[url]["ipv6_addresses"].append(ipv6_true_add)
 
 def get_http_server(url):
