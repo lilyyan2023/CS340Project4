@@ -121,7 +121,7 @@ def get_tls_version(url):
     result = []
     tls = nmap_get_TLS(url)
     if tls != None:
-        result = []
+        result = tls
     if openssl_get_TLSv1_3(url):
         result.append("TLSv1.3")
     dict[url]["hsts"] = result
