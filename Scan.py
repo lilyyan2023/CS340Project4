@@ -15,9 +15,9 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         get_scan_time(url)
-        get_ipv4_addresses(url)
+        #get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
-        #get_http_server(url)
+        get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
         #get_hst(url)
@@ -72,14 +72,13 @@ def get_ipv6_addresses(url):
 
 def get_http_server(url):
     global dict
-    try:
-        r = requests.get(url)
-        if 'server' in r.headers:
-            dict[url]["http_server"] = r.headers['server']
-        else:
-            dict[url]["http_server"] = None
-    except Exception as e:
-        print(e, file=sys.stderr)
+
+    r = requests.get("http://"+url)
+    if 'server' in r.headers:
+        dict[url]["http_server"] = r.headers['server']
+    else:
+        dict[url]["http_server"] = None
+
 
 def check_insecure_http(url):
     global dict
