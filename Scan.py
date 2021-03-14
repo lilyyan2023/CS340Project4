@@ -15,14 +15,14 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         get_scan_time(url)
-        #get_ipv4_addresses(url)
+        get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
         #get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
         #get_hst(url)
-        get_tls_version(url)
-        get_ca(url)
+        #get_tls_version(url)
+        #get_ca(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -43,7 +43,7 @@ def get_ipv4_addresses(url):
         ipv4_adds = ipv4_add_result.split("\n")[2:]
         for ipv4_add in ipv4_adds:
             if ipv4_add.startswith("Address:"):
-                ipv4_true_add = ipv4_add.split("\t")[1]
+                ipv4_true_add = ipv4_add.split(" ")[1]
                 dict[url]["ipv4_addresses"].append(ipv4_true_add)
 def get_ipv6_addresses(url):
     global dict
@@ -57,7 +57,7 @@ def get_ipv6_addresses(url):
         ipv6_adds = ipv6_add_result.split("\n")[2:]
         for ipv6_add in ipv6_adds:
             if ipv6_add.startswith("Address:"):
-                ipv6_true_add = ipv6_add.split("\t")[1]
+                ipv6_true_add = ipv6_add.split(" ")[1]
                 dict[url]["ipv6_addresses"].append(ipv6_true_add)
 
 def get_http_server(url):
