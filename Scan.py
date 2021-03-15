@@ -294,9 +294,5 @@ def get_geo_location(ipv4_add):
 
 
 
-
-
-
-
 scan(sys.argv[1], sys.argv[2])
 
