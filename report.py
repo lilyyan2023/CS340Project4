@@ -29,8 +29,8 @@ def sort_tuple_list(l):
 
 def root_ca(dict):
     table = Texttable()
-    align = ["l"]
-    valign = ["t"]
+    align = ["l","c"]
+    valign = ["t","t"]
     first_row = ["ca", "occurence"]
     domains = list(dict.keys())
     cas = {}
