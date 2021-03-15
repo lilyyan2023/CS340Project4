@@ -266,7 +266,7 @@ def get_rtt_value(url):
     try:
         for ipv4_add in dict[url]["ipv4_addresses"]:
             rtt_result = subprocess.check_output(["sh", "-c",
-                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '443"']
+                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' + ipv4_add+ '443"']
                                           , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
             for element in rtt_result.split("\n"):
                 if element.startswith("real"):
