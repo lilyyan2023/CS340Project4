@@ -24,7 +24,7 @@ def sort_tuple_list(l):
         for j in range(i, len(lst)):
             print(lst[i])
             if lst[i][1] < lst[j][1]:
-                tempt = lst[i][1]
+                tempt = lst[i]
                 lst[i] = lst[j]
                 lst[j] = tempt
     return lst
@@ -38,13 +38,12 @@ def root_ca(dict):
     cas = {}
     for d in domains:
         if "root_ca" in list(dict[d].keys()):
-            calst = dict[d]["root_ca"]
+            ca = dict[d]["root_ca"]
             print(calst)
-            for ca in calst: 
-                if ca in list(cas.keys()):
-                    cas[ca] = cas[ca] + 1
-                else:
-                    cas[ca] = 1
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
     table.set_cols_align(align)
     table.set_cols_valign(valign)
     rows = []
