@@ -1,0 +1,154 @@
+import json
+import time
+import subprocess
+import re
+import requests
+import maxminddb
+from texttable import Texttable
+import copy
+
+import sys
+#import http
+
+def report(input, output):
+    f = open(input, "r")
+    dict = json.load(f)
+    output_f = open(output, "w")
+    output_f.write(information(dict)+rtt(dict)+root_ca(dict)+web_server(dict))
+    output_f.close()
+
+def sort_tuple_list(l):
+    lst = copy.copy(l)
+    for i in range(0, len(lst)):
+        for j in range(i, len(lst)):
+            print(lst[i])
+            if lst[i][1] < lst[j][1]:
+                tempt = lst[i]
+                lst[i] = lst[j]
+                lst[j] = tempt
+    return lst
+
+def sort_tuple_list_rtt(l):
+    lst = copy.copy(l)
+    for i in range(0, len(lst)):
+        for j in range(i, len(lst)):
+            print(lst[i])
+            if lst[i][1][0] < lst[j][1][0]:
+                tempt = lst[i]
+                lst[i] = lst[j]
+                lst[j] = tempt
+    return lst
+
+def rtt(dict):
+    table = Texttable()
+    align = ["l","c"]
+    valign = ["t","t"]
+    first_row = ["ca", "occurence"]
+    domains = list(dict.keys())
+    cas = {}
+    for d in domains:
+        if "rtt_range" in list(dict[d].keys()):
+            ca = dict[d]["rtt_range"]
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = []
+    rows.append(first_row)
+    tuple_list = []
+    for ca in cas.keys():
+        tuple_list.append([ca, cas[ca]])
+    tuple_list = sort_tuple_list_rtt(tuple_list)
+    for t in tuple_list:
+        rows.append([t[0], t[1]])
+    table.add_rows(rows)
+    return table.draw() + "\n"
+
+def root_ca(dict):
+    table = Texttable()
+    align = ["l","c"]
+    valign = ["t","t"]
+    first_row = ["ca", "occurence"]
+    domains = list(dict.keys())
+    cas = {}
+    for d in domains:
+        if "root_ca" in list(dict[d].keys()):
+            ca = dict[d]["root_ca"]
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = []
+    rows.append(first_row)
+    tuple_list = []
+    for ca in cas.keys():
+        tuple_list.append([ca, cas[ca]])
+    tuple_list = sort_tuple_list(tuple_list)
+    for t in tuple_list:
+        rows.append([t[0], t[1]])
+    table.add_rows(rows)
+    return table.draw() + "\n"
+    
+def web_server(dict):
+    table = Texttable()
+    align = ["l","c"]
+    valign = ["t","t"]
+    first_row = ["ca", "occurence"]
+    domains = list(dict.keys())
+    cas = {}
+    for d in domains:
+        if "http_server" in list(dict[d].keys()):
+            ca = dict[d]["http_server"]
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = []
+    rows.append(first_row)
+    tuple_list = []
+    for ca in cas.keys():
+        tuple_list.append([ca, cas[ca]])
+    tuple_list = sort_tuple_list(tuple_list)
+    for t in tuple_list:
+        rows.append([t[0], t[1]])
+    table.add_rows(rows)
+    return table.draw() + "\n"
+
+def information(dict):
+    table = Texttable()
+    align = ["l"]
+    valign = ["t"]
+    first_row = []
+    domains = list(dict.keys())
+    headers = ["scan_time", "ipv4_addresses", "ipv6_addresses", "http_server", "insecure_http", "redirect_to_https", "hsts", "tls_versions", "root_ca", "rdns_names", "rtt_range", "geo_locations"]
+    for i in headers:
+        align.append("l")
+        valign.append("t")
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    table.set_cols_width([10, 10, 20, 30, 10, 5, 5, 10, 10, 10, 10, 10, 10])
+    rows = []
+    first_line = copy.copy(headers)
+    first_line.insert(0, "Name")
+    rows.append(first_line)
+    for d in domains:
+        row = []
+        row.append(d)
+        for h in headers:
+            if h in list(dict[d].keys()):
+                row.append(str(dict[d][h]))
+            else:
+                row.append("")
+        rows.append(row)
+    table.add_rows(rows)
+    return table.draw() + "\n"
+
+
+report(sys.argv[1], sys.argv[2])
+

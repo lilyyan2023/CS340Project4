@@ -17,14 +17,14 @@ def scan(input, output):
         rtt_value = []
         get_scan_time(url)
         get_ipv4_addresses(url)
-        #get_ipv6_addresses(url)
-        #get_http_server(url)
-        #check_insecure_http(url)
-        #get_redirect_to(url)
+        get_ipv6_addresses(url)
+        get_http_server(url)
+        check_insecure_http(url)
+        get_redirect_to(url)
         #get_hst(url)
-        #get_tls_version(url)
-        #get_ca(url)
-        #get_rdns_names(url)
+        get_tls_version(url)
+        get_ca(url)
+        get_rdns_names(url)
         #rtt_value.append(get_rtt_value(url))
         #rtt_value.sort()
         #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
@@ -148,7 +148,7 @@ def get_tls_version(url):
         result = tls
     if openssl_get_TLSv1_3(url):
         result.append("TLSv1.3")
-    dict[url]["hsts"] = result
+    dict[url]["tls_versions"] = result
 
 def get_ca(url):
     result = openssl_get_ca(url)
@@ -158,13 +158,13 @@ def get_ca(url):
 
 def openssl_get_header(url):
     try:
-        print(url)
+        #print(url)
         root = url.split("/")[0]
-        print(root)
+        #print(root)
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", root+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
         output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
-        print(output)
+        #print(output)
         return output
     except subprocess.TimeoutExpired:
         print("Subprocess Timeout", file=sys.stderr)
@@ -211,7 +211,7 @@ def openssl_get_TLSv1_3(url):
 def openssl_get_ca(url):
     try:
         req = subprocess.Popen(["openssl", "s_client", "-connect", url+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = req.communicate(timeout=2)
+        output, error = req.communicate(timeout=5)
         output = output.decode(errors='ignore').split("---\n")
         for line in output:
             if line[0:17] == "Certificate chain":
