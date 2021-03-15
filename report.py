@@ -68,7 +68,7 @@ def information(dict):
         valign.append("t")
     table.set_cols_align(align)
     table.set_cols_valign(valign)
-    table.set_cols_width([10, 10, 40, 40, 10, 10, 10, 20, 20, 10, 10, 10, 30])
+    table.set_cols_width([10, 10, 20, 30, 10, 5, 5, 10, 10, 10, 10, 10, 10])
     rows = []
     first_line = copy.copy(headers)
     first_line.insert(0, "Name")
