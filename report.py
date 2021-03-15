@@ -14,7 +14,7 @@ def report(input, output):
     f = open(input, "r")
     dict = json.load(f)
     output_f = open(output, "w")
-    output_f.write(information(dict)+root_ca(dict))
+    output_f.write(information(dict)+root_ca(dict)+wweb_server(dict))
     output_f.close()
 
 def sort_tuple_list(l):
@@ -27,6 +27,44 @@ def sort_tuple_list(l):
                 lst[i] = lst[j]
                 lst[j] = tempt
     return lst
+
+def sort_tuple_list_rtt(l):
+    lst = copy.copy(l)
+    for i in range(0, len(lst)):
+        for j in range(i, len(lst)):
+            print(lst[i])
+            if lst[i][1][0] < lst[j][1][0]:
+                tempt = lst[i]
+                lst[i] = lst[j]
+                lst[j] = tempt
+    return lst
+
+def root_ca(dict):
+    table = Texttable()
+    align = ["l","c"]
+    valign = ["t","t"]
+    first_row = ["ca", "occurence"]
+    domains = list(dict.keys())
+    cas = {}
+    for d in domains:
+        if "rtt_range" in list(dict[d].keys()):
+            ca = dict[d]["rtt_range"]
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = []
+    rows.append(first_row)
+    tuple_list = []
+    for ca in cas.keys():
+        tuple_list.append([ca, cas[ca]])
+    tuple_list = sort_tuple_list_rtt(tuple_list)
+    for t in tuple_list:
+        rows.append([t[0], t[1]])
+    table.add_rows(rows)
+    return table.draw() + "\n"
 
 def root_ca(dict):
     table = Texttable()
@@ -55,6 +93,32 @@ def root_ca(dict):
     table.add_rows(rows)
     return table.draw() + "\n"
     
+def web_server(dict):
+    table = Texttable()
+    align = ["l","c"]
+    valign = ["t","t"]
+    first_row = ["ca", "occurence"]
+    domains = list(dict.keys())
+    cas = {}
+    for d in domains:
+        if "http_server" in list(dict[d].keys()):
+            ca = dict[d]["http_server"]
+            if ca in list(cas.keys()):
+                cas[ca] = cas[ca] + 1
+            else:
+                cas[ca] = 1
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = []
+    rows.append(first_row)
+    tuple_list = []
+    for ca in cas.keys():
+        tuple_list.append([ca, cas[ca]])
+    tuple_list = sort_tuple_list(tuple_list)
+    for t in tuple_list:
+        rows.append([t[0], t[1]])
+    table.add_rows(rows)
+    return table.draw() + "\n"
 
 def information(dict):
     table = Texttable()
