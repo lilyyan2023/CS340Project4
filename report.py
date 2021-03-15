@@ -35,13 +35,13 @@ def root_ca(dict):
     domains = list(dict.keys())
     cas = {}
     for d in domains:
-        print(dict[d])
-        calst = dict[d]["root_ca"]
-        for ca in calst: 
-            if ca in list(cas.keys()):
-                cas[ca] = cas[ca] + 1
-            else:
-                cas[ca] = 1
+        if "root_ca" in list(dict[d].keys()):
+            calst = dict[d]["root_ca"]
+            for ca in calst: 
+                if ca in list(cas.keys()):
+                    cas[ca] = cas[ca] + 1
+                else:
+                    cas[ca] = 1
     table.set_cols_align(align)
     table.set_cols_valign(valign)
     rows.append(first_row)
@@ -60,7 +60,7 @@ def information(dict):
     valign = ["t"]
     first_row = []
     domains = list(dict.keys())
-    headers = list(dict[domains[0]].keys())
+    headers = ["scan_time", "ipv4_addresses", "ipv6_addresses", "http_server", "insecure_http", "redirect_to_https", "hsts", "tls_versions", "root_ca", "rdns_names", "rtt_range", "geo_locations"]
     for i in headers:
         align.append("l")
         valign.append("t")
@@ -74,7 +74,10 @@ def information(dict):
         row = []
         row.append(d)
         for h in headers:
-            row.append(str(dict[d][h]))
+            if h in list(dict[d].keys()):
+                row.append(str(dict[d][h]))
+            else:
+                row.append("")
         rows.append(row)
     table.add_rows(rows)
     return table.draw() + "\n"
