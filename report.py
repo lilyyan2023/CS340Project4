@@ -28,39 +28,25 @@ def sort_tuple_list(l):
                 lst[j] = tempt
     return lst
 
-def sort_tuple_list_rtt(l):
-    lst = copy.copy(l)
-    for i in range(0, len(lst)):
-        for j in range(i, len(lst)):
-            print(lst[i])
-            if lst[i][1][0] < lst[j][1][0]:
-                tempt = lst[i]
-                lst[i] = lst[j]
-                lst[j] = tempt
-    return lst
 
 def rtt(dict):
     table = Texttable()
     align = ["l","c"]
     valign = ["t","t"]
-    first_row = ["ca", "occurence"]
+    first_row = ["domain", "rtt"]
     domains = list(dict.keys())
-    cas = {}
+    rtt = {}
     for d in domains:
         if "rtt_range" in list(dict[d].keys()):
-            ca = dict[d]["rtt_range"]
-            if ca in list(cas.keys()):
-                cas[ca] = cas[ca] + 1
-            else:
-                cas[ca] = 1
+            rtt[d] = dict[d]["rtt_range"]
     table.set_cols_align(align)
     table.set_cols_valign(valign)
     rows = []
     rows.append(first_row)
     tuple_list = []
-    for ca in cas.keys():
-        tuple_list.append([ca, cas[ca]])
-    tuple_list = sort_tuple_list_rtt(tuple_list)
+    for d in rtt.keys():
+        tuple_list.append([d, rtt[d]])
+    tuple_list = sort_tuple_list(tuple_list)
     for t in tuple_list:
         rows.append([t[0], t[1]])
     table.add_rows(rows)
@@ -97,7 +83,7 @@ def web_server(dict):
     table = Texttable()
     align = ["l","c"]
     valign = ["t","t"]
-    first_row = ["ca", "occurence"]
+    first_row = ["http server", "occurence"]
     domains = list(dict.keys())
     cas = {}
     for d in domains:
@@ -148,6 +134,7 @@ def information(dict):
         rows.append(row)
     table.add_rows(rows)
     return table.draw() + "\n"
+
 
 
 report(sys.argv[1], sys.argv[2])
