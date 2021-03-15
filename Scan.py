@@ -8,6 +8,7 @@ import maxminddb
 import sys
 #import http
 dict = {}
+rtt_value = []
 def scan(input, output):
     f = open(input, "r")
     for line in f.readlines():
@@ -24,7 +25,10 @@ def scan(input, output):
         #get_tls_version(url)
         #get_ca(url)
         #get_rdns_names(url)
-        get_rtt_value(url)
+        rtt_value.append(get_rtt_value(url))
+        rtt_value.sort()
+        dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -258,18 +262,20 @@ def get_rdns_names(url):
 
 def get_rtt_value(url):
     # return one single rtt value
-        try:
-            for ipv4_add in dict[url]["ipv4_addresses"]:
-                rtt_result = subprocess.check_output(["sh", "-c",
+    rtt_value = []
+    try:
+        for ipv4_add in dict[url]["ipv4_addresses"]:
+            rtt_result = subprocess.check_output(["sh", "-c",
                                               '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '"''']
                                           , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
-                for element in rtt_result.split("\n"):
-                    if element.startswith("real"):
-                       return element.split("\t")[1]
+            for element in rtt_result.split("\n"):
+                if element.startswith("real"):
+                    rtt_value.append(element.split("\t")[1])
+        return rtt_value
 
-        except Exception as e:
-            print(e, file=sys.stderr)
-            return None
+    except Exception as e:
+        print(e, file=sys.stderr)
+        return None
 
 def get_geo_location(ipv4_add):
     # return single geo_location, need to remove duplicate in result list
