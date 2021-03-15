@@ -8,13 +8,13 @@ import maxminddb
 import sys
 #import http
 dict = {}
-rtt_value = []
 def scan(input, output):
     f = open(input, "r")
     for line in f.readlines():
         url = line.replace("\n", "")
         print(url)
         dict[url] = {}
+        rtt_value = []
         get_scan_time(url)
         get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
@@ -25,10 +25,10 @@ def scan(input, output):
         #get_tls_version(url)
         #get_ca(url)
         #get_rdns_names(url)
-        rtt_value.append(get_rtt_value(url))
-        rtt_value.sort()
-        dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
-
+        #rtt_value.append(get_rtt_value(url))
+        #rtt_value.sort()
+        #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+        dict[url]["geo_locations"] = get_geo_location(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -266,7 +266,7 @@ def get_rtt_value(url):
     try:
         for ipv4_add in dict[url]["ipv4_addresses"]:
             rtt_result = subprocess.check_output(["sh", "-c",
-                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '"''']
+                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '443"']
                                           , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
             for element in rtt_result.split("\n"):
                 if element.startswith("real"):
@@ -277,20 +277,25 @@ def get_rtt_value(url):
         print(e, file=sys.stderr)
         return None
 
-def get_geo_location(ipv4_add):
+def get_geo_location(url):
     # return single geo_location, need to remove duplicate in result list
     reader = maxminddb.open_database('GeoLite2-City.mmdb')
-    geo_locations_result = reader.get(ipv4_add)
-    if 'subdivisions' in geo_locations_result and 'city' in geo_locations_result:
-         geo_location = [geo_locations_result['city']['names']['en'],
-                         geo_locations_result['subdivisions']['names']['en'],
+    geo_locations = []
+    for	ipv4_add in dict[url]["ipv4_addresses"]:
+        geo_locations_result = reader.get(ipv4_add)
+        print(geo_locations_result)
+        if 'subdivisions' in geo_locations_result and 'city' in geo_locations_result:
+            geo_location = [geo_locations_result['city']['names']['en'],
+                         geo_locations_result['subdivisions'][0]['names']['en'],
                          geo_locations_result['country']['names']['en']]
-    elif 'subdivision' in geo_locations_result:
-        geo_location = [geo_locations_result['subdivisions']['names']['en'],
-                        geo_locations_result['country']['names']['en']]
-    else:
-        geo_location = [geo_locations_result['country']['names']['en']]
-    return geo_location
+        elif 'subdivision' in geo_locations_result:
+            geo_location = [geo_locations_result['subdivisions'][0]['names']['en']
+                        ,geo_locations_result['country']['names']['en']]
+        else:
+            geo_location = [geo_locations_result['country']['names']['en']]
+        if geo_location not in geo_locations:    
+            geo_locations.append(geo_location)
+    return geo_locations
 
 
 
