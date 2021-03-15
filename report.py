@@ -19,6 +19,7 @@ def report(input, output):
 
 def sort_tuple_list(l):
     lst = copy.copy(l)
+    print(lst)
     for i in range(0, len(lst)):
         for j in range(i, len(lst)):
             if lst[i][1] < lst[j][1]:
