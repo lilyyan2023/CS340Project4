@@ -44,7 +44,7 @@ def root_ca(dict):
                     cas[ca] = 1
     table.set_cols_align(align)
     table.set_cols_valign(valign)
-    rows.append(first_row)
+    table.add_rows(first_row)
     tuple_list = []
     for ca in cas.keys():
         tuple_list.append((ca, cas[ca]))
