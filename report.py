@@ -19,7 +19,6 @@ def report(input, output):
 
 def sort_tuple_list(l):
     lst = copy.copy(l)
-    print(lst)
     for i in range(0, len(lst)):
         for j in range(i, len(lst)):
             print(lst[i])
@@ -69,6 +68,7 @@ def information(dict):
         valign.append("t")
     table.set_cols_align(align)
     table.set_cols_valign(valign)
+    table.set_cols_width([10, 40, 40, 10, 10, 10, 20, 20, 10, 10, 10, 30])
     rows = []
     first_line = copy.copy(headers)
     first_line.insert(0, "Name")
