@@ -15,7 +15,7 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         get_scan_time(url)
-        #get_ipv4_addresses(url)
+        get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
         #get_http_server(url)
         #check_insecure_http(url)
@@ -23,7 +23,8 @@ def scan(input, output):
         #get_hst(url)
         #get_tls_version(url)
         #get_ca(url)
-        
+        #get_rdns_names(url)
+        get_rtt_value(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -241,6 +242,7 @@ def get_rdns_names(url):
                     if rdns_list[j].startswith(";;"):
                         rdns_list = rdns_list[:j - 1]
                     j += 1
+                print(rdns_list)
                 for line in rdns_list:
                     rdns_element = line.split("\t")
                     k = 0
@@ -254,15 +256,16 @@ def get_rdns_names(url):
         print(e, file=sys.stderr)
 
 
-def get_rtt_value(ipv4_add):
+def get_rtt_value(url):
     # return one single rtt value
         try:
-            rtt_result = subprocess.check_output(["sh", "-c",
+            for ipv4_add in dict[url]["ipv4_addresses"]:
+                rtt_result = subprocess.check_output(["sh", "-c",
                                               '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '"''']
                                           , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
-            for element in rtt_result.split("\n"):
-                if element.startswith("real"):
-                    return element.split("\t")[1]
+                for element in rtt_result.split("\n"):
+                    if element.startswith("real"):
+                       return element.split("\t")[1]
 
         except Exception as e:
             print(e, file=sys.stderr)

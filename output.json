@@ -1,113 +1,461 @@
 {
     "amazon.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741545.9757578
+        "ipv4_addresses": [
+            "176.32.103.205",
+            "205.251.242.103",
+            "54.239.28.85"
+        ],
+        "rdns_names:": [
+            "s3-console-us-standard.console.aws.amazon.com"
+        ],
+        "scan_time": 1615788175.0588193
     },
     "asee.org": {
-        "redirect_to_https": true,
-        "scan_time": 1615741555.3950622
+        "ipv4_addresses": [
+            "216.185.13.131"
+        ],
+        "rdns_names:": [
+            "216-185-13-131.i95.net"
+        ],
+        "scan_time": 1615788197.6960497
     },
     "auditoryneuroscience.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741554.4537082
+        "ipv4_addresses": [
+            "144.214.26.111"
+        ],
+        "rdns_names:": [
+            "twinkle.bms.cityu.edu.hk"
+        ],
+        "scan_time": 1615788197.018502
     },
     "clocktab.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741554.4017925
+        "ipv4_addresses": [
+            "104.21.35.119",
+            "172.67.220.24"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788196.1083958
     },
     "en.wikipedia.org": {
-        "redirect_to_https": true,
-        "scan_time": 1615741543.851992
+        "ipv4_addresses": [
+            "208.80.154.224",
+            "91.198.174.192"
+        ],
+        "rdns_names:": [
+            "text-lb.eqiad.wikimedia.org",
+            "text-lb.esams.wikimedia.org"
+        ],
+        "scan_time": 1615788172.3591585
     },
     "facebook.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741545.2041378
+        "ipv4_addresses": [
+            "157.240.18.35",
+            "69.171.250.35",
+            "157.240.2.35",
+            "31.13.72.36",
+            "185.60.216.35",
+            "157.240.11.35",
+            "157.240.241.35"
+        ],
+        "rdns_names:": [
+            "edge-star-mini-shv-02-ort2.facebook.com",
+            "edge-star-mini-shv-01-any2.facebook.com",
+            "edge-star-mini-shv-01-ort2.facebook.com",
+            "edge-star-mini-shv-01-arn2.facebook.com",
+            "edge-star-mini-shv-01-frx5.facebook.com",
+            "edge-star-mini-shv-02-lax3.facebook.com",
+            "edge-star-mini-shv-02-lga3.facebook.com"
+        ],
+        "scan_time": 1615788174.4128761
     },
     "fandom.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741547.5715141
+        "ipv4_addresses": [
+            "151.101.0.194",
+            "151.101.64.194",
+            "151.101.128.194",
+            "151.101.192.194"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788177.457503
     },
     "gradeinflation.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741556.2821956
+        "ipv4_addresses": [
+            "66.70.176.24"
+        ],
+        "rdns_names:": [
+            "ahs4.r4l.com"
+        ],
+        "scan_time": 1615788198.6396286
     },
     "illinois.edu": {
-        "redirect_to_https": false,
-        "scan_time": 1615741552.839304
+        "ipv4_addresses": [
+            "192.17.172.3"
+        ],
+        "rdns_names:": [
+            "tardis.techservices.illinois.edu"
+        ],
+        "scan_time": 1615788194.532883
     },
     "imdb.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741547.4457026
+        "ipv4_addresses": [
+            "52.94.225.248",
+            "52.94.228.167",
+            "52.94.237.74"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788176.901935
     },
     "instagram.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741549.7527363
+        "ipv4_addresses": [
+            "52.4.195.35",
+            "52.73.249.1",
+            "3.211.21.100",
+            "3.221.198.91",
+            "3.224.3.80",
+            "3.228.78.219",
+            "34.203.7.201",
+            "52.2.150.28",
+            "54.208.241.139",
+            "34.203.140.217",
+            "34.206.190.171",
+            "54.158.120.136",
+            "3.213.74.73",
+            "34.205.204.155",
+            "54.147.99.161",
+            "52.0.6.2",
+            "52.202.40.154",
+            "52.6.114.101",
+            "34.231.75.214",
+            "54.174.227.162",
+            "35.169.48.27",
+            "3.229.13.24",
+            "54.147.125.27",
+            "52.73.195.174",
+            "34.195.109.138",
+            "3.219.122.233",
+            "52.5.39.111",
+            "3.226.67.47",
+            "52.45.116.207",
+            "52.2.187.236",
+            "35.174.248.8",
+            "52.204.82.6",
+            "54.243.160.191",
+            "34.192.223.130",
+            "52.200.54.57",
+            "3.219.67.68",
+            "34.226.118.112",
+            "52.1.230.205",
+            "34.232.185.248",
+            "3.211.143.145",
+            "34.198.216.139",
+            "52.73.165.14",
+            "3.210.57.193",
+            "52.207.170.164",
+            "34.236.64.38",
+            "3.224.36.18",
+            "3.208.241.235",
+            "54.210.152.179",
+            "35.169.78.20",
+            "34.233.57.208",
+            "3.219.36.135",
+            "3.211.75.78",
+            "34.200.35.57",
+            "3.212.211.9",
+            "3.214.130.200",
+            "34.231.10.103",
+            "23.20.140.115",
+            "52.1.56.59",
+            "52.200.44.115",
+            "3.214.253.183",
+            "52.201.171.115",
+            "3.217.69.239",
+            "3.214.222.87",
+            "35.173.3.158",
+            "52.72.191.48",
+            "35.172.167.44",
+            "34.227.133.179",
+            "54.147.115.251",
+            "34.197.66.165",
+            "54.210.186.221",
+            "34.232.37.224",
+            "52.45.57.150",
+            "3.214.122.70",
+            "34.228.93.200",
+            "3.208.182.172",
+            "34.196.54.210",
+            "3.214.209.46",
+            "54.174.202.172"
+        ],
+        "rdns_names:": [
+            "ec2-52-4-195-35.compute-1.amazonaws.com",
+            "ec2-52-73-249-1.compute-1.amazonaws.com",
+            "ec2-3-211-21-100.compute-1.amazonaws.com",
+            "ec2-3-221-198-91.compute-1.amazonaws.com",
+            "ec2-3-224-3-80.compute-1.amazonaws.com",
+            "ec2-3-228-78-219.compute-1.amazonaws.com",
+            "ec2-34-203-7-201.compute-1.amazonaws.com",
+            "ec2-52-2-150-28.compute-1.amazonaws.com",
+            "ec2-54-208-241-139.compute-1.amazonaws.com",
+            "ec2-34-203-140-217.compute-1.amazonaws.com",
+            "ec2-34-206-190-171.compute-1.amazonaws.com",
+            "ec2-54-158-120-136.compute-1.amazonaws.com",
+            "ec2-3-213-74-73.compute-1.amazonaws.com",
+            "ec2-34-205-204-155.compute-1.amazonaws.com",
+            "ec2-54-147-99-161.compute-1.amazonaws.com",
+            "ec2-52-0-6-2.compute-1.amazonaws.com",
+            "ec2-52-202-40-154.compute-1.amazonaws.com",
+            "ec2-52-6-114-101.compute-1.amazonaws.com",
+            "ec2-34-231-75-214.compute-1.amazonaws.com",
+            "ec2-54-174-227-162.compute-1.amazonaws.com",
+            "ec2-35-169-48-27.compute-1.amazonaws.com",
+            "ec2-3-229-13-24.compute-1.amazonaws.com",
+            "ec2-54-147-125-27.compute-1.amazonaws.com",
+            "ec2-52-73-195-174.compute-1.amazonaws.com",
+            "ec2-34-195-109-138.compute-1.amazonaws.com",
+            "ec2-3-219-122-233.compute-1.amazonaws.com",
+            "ec2-52-5-39-111.compute-1.amazonaws.com",
+            "ec2-3-226-67-47.compute-1.amazonaws.com",
+            "ec2-52-45-116-207.compute-1.amazonaws.com",
+            "ec2-52-2-187-236.compute-1.amazonaws.com",
+            "ec2-35-174-248-8.compute-1.amazonaws.com",
+            "ec2-52-204-82-6.compute-1.amazonaws.com",
+            "ec2-54-243-160-191.compute-1.amazonaws.com",
+            "ec2-34-192-223-130.compute-1.amazonaws.com",
+            "ec2-52-200-54-57.compute-1.amazonaws.com",
+            "ec2-3-219-67-68.compute-1.amazonaws.com",
+            "ec2-34-226-118-112.compute-1.amazonaws.com",
+            "ec2-52-1-230-205.compute-1.amazonaws.com",
+            "ec2-34-232-185-248.compute-1.amazonaws.com",
+            "ec2-3-211-143-145.compute-1.amazonaws.com",
+            "ec2-34-198-216-139.compute-1.amazonaws.com",
+            "ec2-52-73-165-14.compute-1.amazonaws.com",
+            "ec2-3-210-57-193.compute-1.amazonaws.com",
+            "ec2-52-207-170-164.compute-1.amazonaws.com",
+            "ec2-34-236-64-38.compute-1.amazonaws.com",
+            "ec2-3-224-36-18.compute-1.amazonaws.com",
+            "ec2-3-208-241-235.compute-1.amazonaws.com",
+            "ec2-54-210-152-179.compute-1.amazonaws.com",
+            "ec2-35-169-78-20.compute-1.amazonaws.com",
+            "ec2-34-233-57-208.compute-1.amazonaws.com",
+            "ec2-3-219-36-135.compute-1.amazonaws.com",
+            "ec2-3-211-75-78.compute-1.amazonaws.com",
+            "ec2-34-200-35-57.compute-1.amazonaws.com",
+            "ec2-3-212-211-9.compute-1.amazonaws.com",
+            "ec2-3-214-130-200.compute-1.amazonaws.com",
+            "ec2-34-231-10-103.compute-1.amazonaws.com",
+            "ec2-23-20-140-115.compute-1.amazonaws.com",
+            "ec2-52-1-56-59.compute-1.amazonaws.com",
+            "ec2-52-200-44-115.compute-1.amazonaws.com",
+            "ec2-3-214-253-183.compute-1.amazonaws.com",
+            "ec2-52-201-171-115.compute-1.amazonaws.com",
+            "ec2-3-217-69-239.compute-1.amazonaws.com",
+            "ec2-3-214-222-87.compute-1.amazonaws.com",
+            "ec2-35-173-3-158.compute-1.amazonaws.com",
+            "ec2-52-72-191-48.compute-1.amazonaws.com",
+            "ec2-35-172-167-44.compute-1.amazonaws.com",
+            "ec2-34-227-133-179.compute-1.amazonaws.com",
+            "ec2-54-147-115-251.compute-1.amazonaws.com",
+            "ec2-34-197-66-165.compute-1.amazonaws.com",
+            "ec2-54-210-186-221.compute-1.amazonaws.com",
+            "ec2-34-232-37-224.compute-1.amazonaws.com",
+            "ec2-52-45-57-150.compute-1.amazonaws.com",
+            "ec2-3-214-122-70.compute-1.amazonaws.com",
+            "ec2-34-228-93-200.compute-1.amazonaws.com",
+            "ec2-3-208-182-172.compute-1.amazonaws.com",
+            "ec2-34-196-54-210.compute-1.amazonaws.com",
+            "ec2-3-214-209-46.compute-1.amazonaws.com",
+            "ec2-54-174-202-172.compute-1.amazonaws.com"
+        ],
+        "scan_time": 1615788183.786643
     },
     "it.eecs.northwestern.edu": {
-        "redirect_to_https": false,
-        "scan_time": 1615741551.6839678
+        "ipv4_addresses": [
+            "129.105.8.2"
+        ],
+        "rdns_names:": [
+            "it.ece.northwestern.edu"
+        ],
+        "scan_time": 1615788193.2350605
     },
     "kellogg.northwestern.edu": {
-        "redirect_to_https": true,
-        "scan_time": 1615741551.6320982
+        "ipv4_addresses": [
+            "165.124.147.150"
+        ],
+        "rdns_names:": [
+            "kelloggalumni.kellogg.northwestern.edu",
+            "kellogg.northwestern.edu"
+        ],
+        "scan_time": 1615788191.8803518
     },
     "kli.org": {
-        "redirect_to_https": true,
-        "scan_time": 1615741557.0500154
+        "ipv4_addresses": [
+            "104.21.22.57",
+            "172.67.202.249"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788200.9583287
     },
     "mccormick.northwestern.edu": {
-        "redirect_to_https": true,
-        "scan_time": 1615741551.6052408
+        "ipv4_addresses": [
+            "129.105.1.129"
+        ],
+        "rdns_names:": [
+            "mccormick.northwestern.edu"
+        ],
+        "scan_time": 1615788191.1924098
     },
     "northwestern.edu": {
-        "redirect_to_https": true,
-        "scan_time": 1615741551.5696716
+        "ipv4_addresses": [
+            "129.105.136.48"
+        ],
+        "rdns_names:": [
+            "cnair.northwestern.edu",
+            "evcommon-caesar-vip.northwestern.edu"
+        ],
+        "scan_time": 1615788190.3010943
     },
     "pinterest.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741547.6735346
+        "ipv4_addresses": [
+            "151.101.192.84",
+            "151.101.0.84",
+            "151.101.64.84",
+            "151.101.128.84"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788178.0695052
     },
     "pmichaud.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741556.7855167
+        "ipv4_addresses": [
+            "23.254.203.248"
+        ],
+        "rdns_names:": [
+            "hwsrv-233708.hostwindsdns.com"
+        ],
+        "scan_time": 1615788200.0272384
     },
     "reddit.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741546.9793553
+        "ipv4_addresses": [
+            "151.101.65.140",
+            "151.101.129.140",
+            "151.101.193.140",
+            "151.101.1.140"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788176.6370702
     },
     "spacejam.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741556.422324
+        "ipv4_addresses": [
+            "75.2.104.223",
+            "99.83.180.228"
+        ],
+        "rdns_names:": [
+            "a259cf76d74e1f65f.awsglobalaccelerator.com",
+            "a259cf76d74e1f65f.awsglobalaccelerator.com"
+        ],
+        "scan_time": 1615788199.352573
     },
     "stevetarzia.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741554.1827216
+        "ipv4_addresses": [
+            "54.245.121.172"
+        ],
+        "rdns_names:": [
+            "grits.stevetarzia.com"
+        ],
+        "scan_time": 1615788195.3742456
     },
     "tripadvisor.com": {
-        "scan_time": 1615741547.7485769
+        "ipv4_addresses": [
+            "192.229.189.15",
+            "192.229.162.112",
+            "192.229.182.112"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788183.2146254
     },
     "twitter.com": {
-        "redirect_to_https": false,
-        "scan_time": 1615741544.6204002
+        "ipv4_addresses": [
+            "104.244.42.129",
+            "104.244.42.65",
+            "104.244.42.1",
+            "104.244.42.193"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788172.929433
     },
     "uchicago.edu": {
-        "redirect_to_https": true,
-        "scan_time": 1615741551.7192252
+        "ipv4_addresses": [
+            "34.200.129.209"
+        ],
+        "rdns_names:": [
+            "ec2-34-200-129-209.compute-1.amazonaws.com"
+        ],
+        "scan_time": 1615788193.9760118
     },
     "users.cs.northwestern.edu": {
-        "redirect_to_https": false,
-        "scan_time": 1615741551.6582987
+        "ipv4_addresses": [
+            "165.124.180.20"
+        ],
+        "rdns_names:": [
+            "web1.cs.northwestern.edu"
+        ],
+        "scan_time": 1615788192.518089
     },
     "walmart.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741549.9927845
+        "ipv4_addresses": [
+            "161.170.230.170",
+            "161.170.232.170"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788185.1711962
     },
     "yelp.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741546.1239548
+        "ipv4_addresses": [
+            "199.232.76.116",
+            "151.101.52.116",
+            "199.232.64.116",
+            "151.101.36.116",
+            "199.232.8.116",
+            "199.232.36.116"
+        ],
+        "rdns_names:": [],
+        "scan_time": 1615788175.6002207
     },
     "youtube.com": {
-        "redirect_to_https": true,
-        "scan_time": 1615741543.7920692
+        "ipv4_addresses": [
+            "172.217.8.174",
+            "172.217.8.206",
+            "172.217.6.110",
+            "172.217.4.238",
+            "142.250.80.14",
+            "216.58.207.206",
+            "216.58.192.238",
+            "173.194.220.91",
+            "173.194.220.136",
+            "173.194.220.93",
+            "173.194.220.190",
+            "172.217.7.14",
+            "172.217.9.78",
+            "172.217.10.142"
+        ],
+        "rdns_names:": [
+            "ord37s08-in-f14.1e100.net",
+            "ord37s09-in-f14.1e100.net",
+            "ord37s03-in-f14.1e100.net",
+            "ord37s03-in-f110.1e100.net",
+            "ord30s31-in-f238.1e100.net",
+            "ord30s31-in-f14.1e100.net",
+            "lga34s33-in-f14.1e100.net",
+            "arn11s04-in-f14.1e100.net",
+            "ord30s26-in-f14.1e100.net",
+            "ord30s26-in-f238.1e100.net",
+            "lk-in-f91.1e100.net",
+            "lk-in-f136.1e100.net",
+            "lk-in-f93.1e100.net",
+            "lk-in-f190.1e100.net",
+            "lga25s56-in-f14.1e100.net",
+            "ord38s09-in-f14.1e100.net",
+            "lga34s16-in-f14.1e100.net"
+        ],
+        "scan_time": 1615788171.7120864
     }
 }
