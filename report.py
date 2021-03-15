@@ -48,7 +48,7 @@ def root_ca(dict):
     rows.append(first_row)
     tuple_list = []
     for ca in cas.keys():
-        tuple_list.append((ca, cas[ca]))
+        tuple_list.append([ca, cas[ca]])
     tuple_list = sort_tuple_list(tuple_list)
     for t in tuple_list:
         rows.append([t[0], t[1]])
