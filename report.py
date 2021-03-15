@@ -39,7 +39,6 @@ def root_ca(dict):
     for d in domains:
         if "root_ca" in list(dict[d].keys()):
             ca = dict[d]["root_ca"]
-            print(calst)
             if ca in list(cas.keys()):
                 cas[ca] = cas[ca] + 1
             else:
