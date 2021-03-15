@@ -283,8 +283,8 @@ def get_geo_location(ipv4_add):
         geo_location = [geo_locations_result['country']['names']['en']]
     return geo_location
 
-
-
+get_ipv4_addresses("129.105.136.48")
+get_rdns_names("129.105.136.48")
 
 
 
