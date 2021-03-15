@@ -4,7 +4,7 @@ import subprocess
 import re
 import requests
 import maxminddb
-
+import socket
 import sys
 #import http
 dict = {}
@@ -265,12 +265,21 @@ def get_rtt_value(url):
     rtt_value = []
     try:
         for ipv4_add in dict[url]["ipv4_addresses"]:
-            ipv4_add_str = str(ipv4_add)
-            rtt_result = subprocess.check_output(["sh", "-c",'"time echo -e', "'\x1dclose\x0d'" , '| telnet' ,ipv4_add_str, '443"']
-                                          , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
-            for element in rtt_result.split("\n"):
-                if element.startswith("real"):
-                    rtt_value.append(element.split("\t")[1])
+            sock_params = (ipv4_add, 443)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.settimeout(40)
+                sock.connect(sock_params)
+                t1 = time.time()
+                sock.sendall(b'1')
+                data = sock.recv(1)
+                t2 = time.time()
+                rtt_value.append(t2 - t1)
+            # ipv4_add_str = str(ipv4_add)
+            # rtt_result = subprocess.check_output(["sh", "-c",'"time echo -e', "'\x1dclose\x0d'" , '| telnet' ,ipv4_add_str, '443"']
+            #                               , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
+            # for element in rtt_result.split("\n"):
+            #     if element.startswith("real"):
+            #         rtt_value.append(element.split("\t")[1])
         return rtt_value
 
     except Exception as e:
