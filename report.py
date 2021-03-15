@@ -35,6 +35,7 @@ def root_ca(dict):
     domains = list(dict.keys())
     cas = {}
     for d in domains:
+        print(dict[d])
         calst = dict[d]["root_ca"]
         for ca in calst: 
             if ca in list(cas.keys()):
