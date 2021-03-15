@@ -25,10 +25,10 @@ def scan(input, output):
         #get_tls_version(url)
         #get_ca(url)
         #get_rdns_names(url)
-        #rtt_value.append(get_rtt_value(url))
-        #rtt_value.sort()
+        rtt_value.append(get_rtt_value(url))
+        rtt_value.sort()
         #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
-        dict[url]["geo_locations"] = get_geo_location(url)
+        #dict[url]["geo_locations"] = get_geo_location(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -265,8 +265,9 @@ def get_rtt_value(url):
     rtt_value = []
     try:
         for ipv4_add in dict[url]["ipv4_addresses"]:
+            ipv4_add_str = str(ipv4_add)
             rtt_result = subprocess.check_output(["sh", "-c",
-                                              '"time echo -e' + "'\x1dclose\x0d'" + '| telnet' +ipv4_add+ '443"']
+                                                  '"time echo -e', "'\x1dclose\x0d'" , '| telnet' ,ipv4_add_str, '443"']
                                           , timeout = 5, stderr = subprocess.STDOUT).decode("utf-8")
             for element in rtt_result.split("\n"):
                 if element.startswith("real"):
