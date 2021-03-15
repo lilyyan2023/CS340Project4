@@ -220,7 +220,7 @@ def openssl_get_ca(url):
         print(e, file=sys.stderr)
         return None
 
-def get_rdns_names(url, ipv4_add):
+def get_rdns_names(url):
     global dict
     dict[url]["rdns_names:"] = []
     # extract ipv4_add from part B
@@ -249,7 +249,7 @@ def get_rdns_names(url, ipv4_add):
                             rdns_name = rdns_element[k + 1][:-1]
                             dict[url]["rdns_names:"].append(rdns_name)
                         k += 1
-                   
+
     except Exception as e:
         print(e, file=sys.stderr)
 
