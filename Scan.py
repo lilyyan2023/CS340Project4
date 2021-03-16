@@ -119,7 +119,7 @@ def get_redirect_to(url):
     global dict
     try:
         r = requests.get("http://"+url, timeout=5)
-        if str(r.status_code)[0:2] == "30":
+        if str(r.status_code)[0:1] == "30":
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
