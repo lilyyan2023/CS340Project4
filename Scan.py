@@ -119,7 +119,6 @@ def get_redirect_to(url):
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
-        print(dict)
     except Exception as e:
         print(e, file=sys.stderr)
         return None
