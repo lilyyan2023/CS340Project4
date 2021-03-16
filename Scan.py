@@ -14,25 +14,25 @@ def scan(input, output):
         url = line.replace("\n", "")
         print(url)
         dict[url] = {}
-        #rtt_value = []
-        #get_scan_time(url)
-        #get_ipv4_addresses(url)
-        #get_ipv6_addresses(url)
-        #get_http_server(url)
-        #check_insecure_http(url)
-        #get_redirect_to(url)
+        rtt_value = []
+        get_scan_time(url)
+        get_ipv4_addresses(url)
+        get_ipv6_addresses(url)
+        get_http_server(url)
+        check_insecure_http(url)
+        get_redirect_to(url)
         get_hst(url)
-        #get_tls_version(url)
-        #get_ca(url)
-        #get_rdns_names(url)
-        #rtt_value = get_rtt_value(url)
-        #if rtt_value != None:
-            #rtt_value.sort()
+        get_tls_version(url)
+        get_ca(url)
+        get_rdns_names(url)
+        rtt_value = get_rtt_value(url)
+        if rtt_value != None:
+            rtt_value.sort()
             #print(rtt_value)
-            #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
-        #else:
-            #dict[url]["rtt_range"] = [None, None]
-        #dict[url]["geo_locations"] = get_geo_location(url)
+            dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+        else:
+            dict[url]["rtt_range"] = [None, None]
+        dict[url]["geo_locations"] = get_geo_location(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -129,11 +129,10 @@ def get_hst(url):
         r = requests.get("http://"+url, timeout=5)
         while 'Location' in r.headers:
             r = requests.get("http://"+r.headers[location], timeout=5)
-        print(r.headers)
         if "Strict-Transport-Security" in r.headers:
-            dict["hsts"] = True
+            dict[url]["hsts"] = True
         else:
-            dict["hsts"] = False
+            dict[url]["hsts"] = False
     except Exception as e:
         print(e, file=sys.stderr)
         return None
@@ -244,7 +243,7 @@ def get_rdns_names(url):
                     if rdns_list[j].startswith(";;"):
                         rdns_list = rdns_list[:j - 1]
                     j += 1
-                print(rdns_list)
+                #print(rdns_list)
                 for line in rdns_list:
                     rdns_element = line.split("\t")
                     k = 0
@@ -289,7 +288,7 @@ def get_geo_location(url):
     geo_locations = []
     for	ipv4_add in dict[url]["ipv4_addresses"]:
         geo_locations_result = reader.get(ipv4_add)
-        print(geo_locations_result)
+        #print(geo_locations_result)
         if 'subdivisions' in geo_locations_result and 'city' in geo_locations_result:
             geo_location = [geo_locations_result['city']['names']['en'],
                          geo_locations_result['subdivisions'][0]['names']['en'],
