@@ -164,6 +164,8 @@ def openssl_get_header(url):
         print(root)
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", root+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
+        print(output)
+        print(error)
         output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
         print(output)
         return output
