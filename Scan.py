@@ -120,7 +120,7 @@ def get_redirect_to(url):
     #https://stackoverflow.com/questions/33684356/how-to-capture-the-output-of-openssl-in-python
     lst = openssl_get_header(url)
     if lst != None:
-        if int(lst[0][9:12]) == 301:
+        if int(lst[0][9:11]) == 300:
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
@@ -159,13 +159,13 @@ def get_ca(url):
 
 def openssl_get_header(url):
     try:
-        #print(url)
+        print(url)
         root = url.split("/")[0]
-        #print(root)
+        print(root)
         req = subprocess.Popen(["openssl", "s_client", "-quiet", "-connect", root+":443"],stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = req.communicate(bytes("GET / HTTP/1.0\r\nHost: " + url+"\r\n\r\n",encoding="utf-8"), timeout=2)
         output = output.decode(errors='ignore').split("\r\n\r\n")[0].split("\r\n")
-        #print(output)
+        print(output)
         return output
     except subprocess.TimeoutExpired:
         print("Subprocess Timeout", file=sys.stderr)
