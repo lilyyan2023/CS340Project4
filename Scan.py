@@ -15,7 +15,7 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         #rtt_value = []
-        get_scan_time(url)
+        #get_scan_time(url)
         #get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
         #get_http_server(url)
@@ -59,6 +59,9 @@ def get_ipv4_addresses(url):
                         dict[url]["ipv4_addresses"].append(ipv4_true_add)
     except Exception as e:
         print(e, file=sys.stderr)
+    except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
+        return None
 
 
 def get_ipv6_addresses(url):
@@ -79,6 +82,9 @@ def get_ipv6_addresses(url):
                         dict[url]["ipv6_addresses"].append(ipv6_true_add)
     except Exception as e:
         print(e, file=sys.stderr)
+    except subprocess.TimeoutExpired:
+        print("Subprocess Timeout", file=sys.stderr)
+        return None
 
 def get_http_server(url):
     global dict
@@ -123,6 +129,7 @@ def get_hst(url):
         r = requests.get("http://"+url, timeout=5)
         while 'Location' in r.headers:
             r = requests.get("http://"+r.headers[location], timeout=5)
+        print(r.headers)
         if "Strict-Transport-Security" in r.headers:
             dict["hsts"] = True
         else:
