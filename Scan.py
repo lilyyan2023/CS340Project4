@@ -123,7 +123,8 @@ def get_redirect_to(url):
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
-    else:
+    except Exception as e:
+        print(e, file=sys.stderr)
         return None
 
 def get_hst(url):
