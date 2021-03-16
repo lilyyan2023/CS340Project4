@@ -13,8 +13,8 @@ def scan(input, output):
     for line in f.readlines():
         url = line.replace("\n", "")
         #print(url)
-        """
         dict[url] = {}
+        """
         rtt_value = []
         get_scan_time(url)
         get_ipv4_addresses(url)
