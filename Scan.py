@@ -14,13 +14,16 @@ def scan(input, output):
         url = line.replace("\n", "")
         #print(url)
         dict[url] = {}
+        """
         rtt_value = []
         get_scan_time(url)
         get_ipv4_addresses(url)
         get_ipv6_addresses(url)
         get_http_server(url)
         check_insecure_http(url)
+        """
         get_redirect_to(url)
+        """
         get_hst(url)
         get_tls_version(url)
         get_ca(url)
@@ -33,6 +36,7 @@ def scan(input, output):
         else:
             dict[url]["rtt_range"] = [None, None]
         dict[url]["geo_locations"] = get_geo_location(url)
+        """
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
