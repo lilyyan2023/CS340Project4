@@ -14,24 +14,24 @@ def scan(input, output):
         url = line.replace("\n", "")
         print(url)
         dict[url] = {}
-        rtt_value = []
-        #get_scan_time(url)
-        get_ipv4_addresses(url)
+        #rtt_value = []
+        get_scan_time(url)
+        #get_ipv4_addresses(url)
         #get_ipv6_addresses(url)
         #get_http_server(url)
         #check_insecure_http(url)
         #get_redirect_to(url)
-        #get_hst(url)
+        get_hst(url)
         #get_tls_version(url)
         #get_ca(url)
         #get_rdns_names(url)
-        rtt_value = get_rtt_value(url)
-        if rtt_value != None:
-            rtt_value.sort()
-            print(rtt_value)
-            dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
-        else:
-            dict[url]["rtt_range"] = [None, None]
+        #rtt_value = get_rtt_value(url)
+        #if rtt_value != None:
+            #rtt_value.sort()
+            #print(rtt_value)
+            #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+        #else:
+            #dict[url]["rtt_range"] = [None, None]
         #dict[url]["geo_locations"] = get_geo_location(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
@@ -119,30 +119,14 @@ def get_redirect_to(url):
 
 def get_hst(url):
     global dict
-    lst = openssl_get_header(url)
-    if lst != None:
-        while int(lst[0][9:12]) == 301:
-            location = ""
-            for h in lst:
-                if h.split(": ")[0] == "Location":
-                    location = h.split(": ")[1]
-                    break
-            if location == "":
-                break
-            if "://" in location:
-                location = location.split("://")[1]
-            print(location)
-            if location[-1] == "/":
-                location = location[0:len(location)-1]
-            lst = openssl_get_header(location)
-        result = False
-        for h in lst:
-            if h.split(": ")[0] == "Strict-Transport-Security":
-                result = True
-                break
-        dict[url]["hsts"] = result
-    else:
-        return None
+    try:
+        r = requests.get("http://"+url, timeout=5)
+        while 'Location' in r.headers:
+            r = requests.get("http://"+r.headers[location], timeout=5)
+        if "Strict-Transport-Security" in r.headers:
+            dict["hsts"] = True
+        else:
+            dict["hsts"] = False
 
 def get_tls_version(url):
     global dict
