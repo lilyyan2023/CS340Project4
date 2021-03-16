@@ -13,6 +13,7 @@ def scan(input, output):
     for line in f.readlines():
         url = line.replace("\n", "")
         #print(url)
+        """
         dict[url] = {}
         rtt_value = []
         get_scan_time(url)
@@ -20,7 +21,9 @@ def scan(input, output):
         get_ipv6_addresses(url)
         get_http_server(url)
         check_insecure_http(url)
+        """
         get_redirect_to(url)
+        """
         get_hst(url)
         get_tls_version(url)
         get_ca(url)
@@ -33,6 +36,7 @@ def scan(input, output):
         else:
             dict[url]["rtt_range"] = [None, None]
         dict[url]["geo_locations"] = get_geo_location(url)
+        """
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
 
@@ -113,10 +117,9 @@ def check_insecure_http(url):
 
 def get_redirect_to(url):
     global dict
-    #https://stackoverflow.com/questions/33684356/how-to-capture-the-output-of-openssl-in-python
-    lst = openssl_get_header(url)
-    if lst != None:
-        if int(lst[0][9:11]) == 30:
+    try:
+        r = requests.get("http://"+url, timeout=5)
+        if str(r.status_code)[0:2] == 30:
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
