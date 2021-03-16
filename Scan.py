@@ -296,7 +296,7 @@ def get_geo_location(url):
         elif 'subdivision' in geo_locations_result:
             geo_location = [geo_locations_result['subdivisions'][0]['names']['en']
                         ,geo_locations_result['country']['names']['en']]
-        else:
+        elif 'country' in geo_locations_result:
             geo_location = [geo_locations_result['country']['names']['en']]
         if geo_location not in geo_locations:    
             geo_locations.append(geo_location)
