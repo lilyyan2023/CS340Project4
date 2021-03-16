@@ -29,7 +29,7 @@ def scan(input, output):
         if rtt_value != None:
             rtt_value.sort()
             #print(rtt_value)
-            dict[url]["rtt_range"] = [int(rtt_value[0]*1000), int(rtt_value[-1]*1000)]
+            dict[url]["rtt_range"] = [rtt_value[0]*1000, rtt_value[-1]*1000]
         else:
             dict[url]["rtt_range"] = [None, None]
         dict[url]["geo_locations"] = get_geo_location(url)
