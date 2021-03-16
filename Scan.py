@@ -116,7 +116,7 @@ def get_redirect_to(url):
     #https://stackoverflow.com/questions/33684356/how-to-capture-the-output-of-openssl-in-python
     lst = openssl_get_header(url)
     if lst != None:
-        if int(lst[0][9:11]) == 300:
+        if int(lst[0][9:11]) == 30:
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
