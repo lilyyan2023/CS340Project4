@@ -12,7 +12,7 @@ def scan(input, output):
     f = open(input, "r")
     for line in f.readlines():
         url = line.replace("\n", "")
-        #print(url)
+        print(url)
         dict[url] = {}
         """
         rtt_value = []
