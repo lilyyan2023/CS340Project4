@@ -27,6 +27,16 @@ def sort_tuple_list(l):
                 lst[j] = tempt
     return lst
 
+def sort_tuple_list_rtt(l):
+    lst = copy.copy(l)
+    for i in range(0, len(lst)):
+        for j in range(i, len(lst)):
+            if lst[i][1] > lst[j][1]:
+                tempt = lst[i]
+                lst[i] = lst[j]
+                lst[j] = tempt
+    return lst
+
 
 def rtt(dict):
     table = Texttable()
@@ -45,7 +55,7 @@ def rtt(dict):
     tuple_list = []
     for d in rtt.keys():
         tuple_list.append([d, rtt[d]])
-    tuple_list = sort_tuple_list(tuple_list)
+    tuple_list = sort_tuple_list_rtt(tuple_list)
     for t in tuple_list:
         rows.append([t[0], t[1]])
     table.add_rows(rows)
