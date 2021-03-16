@@ -15,19 +15,23 @@ def scan(input, output):
         print(url)
         dict[url] = {}
         rtt_value = []
-        get_scan_time(url)
+        #get_scan_time(url)
         get_ipv4_addresses(url)
-        get_ipv6_addresses(url)
-        get_http_server(url)
-        check_insecure_http(url)
-        get_redirect_to(url)
+        #get_ipv6_addresses(url)
+        #get_http_server(url)
+        #check_insecure_http(url)
+        #get_redirect_to(url)
         #get_hst(url)
-        get_tls_version(url)
-        get_ca(url)
-        get_rdns_names(url)
-        #rtt_value.append(get_rtt_value(url))
-        #rtt_value.sort()
-        #dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+        #get_tls_version(url)
+        #get_ca(url)
+        #get_rdns_names(url)
+        rtt_value = get_rtt_value(url)
+        if rtt_value != None:
+            rtt_value.sort()
+            print(rtt_value)
+            dict[url]["rtt_range"] = [rtt_value[0], rtt_value[-1]]
+        else:
+            dict[url]["rtt_range"] = [None, None]
         #dict[url]["geo_locations"] = get_geo_location(url)
     output_f = open(output, "w")
     json.dump(dict, output_f, sort_keys=True, indent=4)
@@ -265,13 +269,12 @@ def get_rtt_value(url):
     rtt_value = []
     try:
         for ipv4_add in dict[url]["ipv4_addresses"]:
-            sock_params = (ipv4_add, 443)
+            ipv4_add_str = str(ipv4_add)    
+            sock_params = (ipv4_add_str, 443)
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-                sock.settimeout(40)
-                sock.connect(sock_params)
+                sock.settimeout(10)
                 t1 = time.time()
-                sock.sendall(b'1')
-                data = sock.recv(1)
+                sock.connect(sock_params)
                 t2 = time.time()
                 rtt_value.append(t2 - t1)
             # ipv4_add_str = str(ipv4_add)
