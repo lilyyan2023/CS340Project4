@@ -14,7 +14,7 @@ def report(input, output):
     f = open(input, "r")
     dict = json.load(f)
     output_f = open(output, "w")
-    output_f.write(information(dict)+rtt(dict)+root_ca(dict)+web_server(dict))
+    output_f.write(information(dict)+rtt(dict)+root_ca(dict)+web_server(dict)+percentage(dict))
     output_f.close()
 
 def sort_tuple_list(l):
@@ -22,6 +22,16 @@ def sort_tuple_list(l):
     for i in range(0, len(lst)):
         for j in range(i, len(lst)):
             if lst[i][1] < lst[j][1]:
+                tempt = lst[i]
+                lst[i] = lst[j]
+                lst[j] = tempt
+    return lst
+
+def sort_tuple_list_rtt(l):
+    lst = copy.copy(l)
+    for i in range(0, len(lst)):
+        for j in range(i, len(lst)):
+            if lst[i][1] > lst[j][1]:
                 tempt = lst[i]
                 lst[i] = lst[j]
                 lst[j] = tempt
@@ -45,7 +55,7 @@ def rtt(dict):
     tuple_list = []
     for d in rtt.keys():
         tuple_list.append([d, rtt[d]])
-    tuple_list = sort_tuple_list(tuple_list)
+    tuple_list = sort_tuple_list_rtt(tuple_list)
     for t in tuple_list:
         rows.append([t[0], t[1]])
     table.add_rows(rows)
@@ -166,7 +176,7 @@ def percentage(dict):
             redirect += 1
         if dict[k]["hsts"]:
             hsts += 1
-        if dict[k][ipv6_addresses] != []:
+        if dict[k]["ipv6_addresses"] != []:
             ipv6 += 1
     table = Texttable()
     align = ["l", "c"]
