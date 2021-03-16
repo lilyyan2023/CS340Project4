@@ -176,7 +176,7 @@ def percentage(dict):
             redirect += 1
         if dict[k]["hsts"]:
             hsts += 1
-        if dict[k][ipv6_addresses] != []:
+        if dict[k]["ipv6_addresses"] != []:
             ipv6 += 1
     table = Texttable()
     align = ["l", "c"]
