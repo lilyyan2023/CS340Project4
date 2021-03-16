@@ -21,7 +21,6 @@ def sort_tuple_list(l):
     lst = copy.copy(l)
     for i in range(0, len(lst)):
         for j in range(i, len(lst)):
-            print(lst[i])
             if lst[i][1] < lst[j][1]:
                 tempt = lst[i]
                 lst[i] = lst[j]
@@ -135,7 +134,57 @@ def information(dict):
     table.add_rows(rows)
     return table.draw() + "\n"
 
-
-
+def percentage(dict):
+    TLS_lst = ["SSLv2", "SSLv3", "TLSv1.0", "TLSv1.1", "TLSv1.2", "TLSv1.3"]
+    total = len(list(dict.keys()))
+    sslv2 = 0
+    sslv3 = 0
+    tls0 = 0
+    tls1 = 0
+    tls2 = 0
+    tls3 = 0
+    plain = 0
+    redirect = 0
+    hsts = 0
+    ipv6 = 0
+    for k in dict.keys():
+        if "SSLv2" in dict[k]["tls_versions"]:
+            sslv2 += 1
+        if "SSLv3" in dict[k]["tls_versions"]:
+            sslv3 += 1
+        if "TLSv1.0" in dict[k]["tls_versions"]:
+            tls0 += 1
+        if "TLSv1.1" in dict[k]["tls_versions"]:
+            tls1 += 1
+        if "TLSv1.2" in dict[k]["tls_versions"]:
+            tls2 += 1
+        if "TLSv1.3" in dict[k]["tls_versions"]:
+            tls3 += 1
+        if dict[k]["insecure_http"]:
+            plain += 1
+        if dict[k]["redirect_to_https"]:
+            redirect += 1
+        if dict[k]["hsts"]:
+            hsts += 1
+        if dict[k][ipv6_addresses] != []:
+            ipv6 += 1
+    table = Texttable()
+    align = ["l", "c"]
+    valign = ["t", "t"]
+    table.set_cols_align(align)
+    table.set_cols_valign(valign)
+    rows = [["Name", "Percentage"],
+            ["SSlv2", int(sslv2/total*100)],
+            ["SSlv3", int(sslv3/total*100)],
+            ["TLSv1.0", int(tls0/total*100)],
+            ["TLSv1.1", int(tls1/total*100)],
+            ["TLSv1.2", int(tls2/total*100)],
+            ["TLSv1.3", int(tls3/total*100)],
+            ["plain http", int(plain/total*100)],
+            ["https redirect", int(redirect/total*100)], 
+            ["hsts", int(hsts/total*100)],
+            ["ipv6", int(ipv6/total*100)]]
+    table.add_rows(rows)
+    return table.draw() + "\n"
 report(sys.argv[1], sys.argv[2])
 
