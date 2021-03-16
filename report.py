@@ -158,25 +158,26 @@ def percentage(dict):
     hsts = 0
     ipv6 = 0
     for k in dict.keys():
-        if "SSLv2" in dict[k]["tls_versions"]:
-            sslv2 += 1
-        if "SSLv3" in dict[k]["tls_versions"]:
-            sslv3 += 1
-        if "TLSv1.0" in dict[k]["tls_versions"]:
-            tls0 += 1
-        if "TLSv1.1" in dict[k]["tls_versions"]:
-            tls1 += 1
-        if "TLSv1.2" in dict[k]["tls_versions"]:
-            tls2 += 1
-        if "TLSv1.3" in dict[k]["tls_versions"]:
-            tls3 += 1
-        if dict[k]["insecure_http"]:
+        if "tls_versions" in list(dict[k].keys()):
+            if "SSLv2" in dict[k]["tls_versions"]:
+                sslv2 += 1
+            if "SSLv3" in dict[k]["tls_versions"]:
+                sslv3 += 1
+            if "TLSv1.0" in dict[k]["tls_versions"]:
+                tls0 += 1
+            if "TLSv1.1" in dict[k]["tls_versions"]:
+                tls1 += 1
+            if "TLSv1.2" in dict[k]["tls_versions"]:
+                tls2 += 1
+            if "TLSv1.3" in dict[k]["tls_versions"]:
+                tls3 += 1
+        if "insecure_http" in list(dict[k].keys()) and dict[k]["insecure_http"]:
             plain += 1
-        if dict[k]["redirect_to_https"]:
+        if "redirect_to_https" in list(dict[k].keys()) and dict[k]["redirect_to_https"]:
             redirect += 1
-        if dict[k]["hsts"]:
+        if "hsts" in list(dict[k].keys()) and dict[k]["hsts"]:
             hsts += 1
-        if dict[k]["ipv6_addresses"] != []:
+        if "ipv6_addresses" in list(dict[k].keys()) and dict[k]["ipv6_addresses"] != []:
             ipv6 += 1
     table = Texttable()
     align = ["l", "c"]
