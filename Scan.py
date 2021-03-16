@@ -127,6 +127,9 @@ def get_hst(url):
             dict["hsts"] = True
         else:
             dict["hsts"] = False
+    except Exception as e:
+        print(e, file=sys.stderr)
+        return None
 
 def get_tls_version(url):
     global dict
