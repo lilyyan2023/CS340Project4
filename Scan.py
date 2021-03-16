@@ -119,7 +119,7 @@ def get_redirect_to(url):
     global dict
     try:
         r = requests.get("http://"+url, timeout=5)
-        if str(r.status_code)[0:2] == 30:
+        if str(r.status_code)[0:1] == 30:
             dict[url]["redirect_to_https"] = True
         else:
             dict[url]["redirect_to_https"] = False
@@ -131,12 +131,18 @@ def get_hst(url):
     global dict
     try:
         r = requests.get("http://"+url, timeout=5)
-        while 'Location' in r.headers:
+        counter = 0
+        while 'Location' in r.headers and counter < 10:
             r = requests.get("http://"+r.headers[location], timeout=5)
-        if "Strict-Transport-Security" in r.headers:
-            dict[url]["hsts"] = True
+            counter += 1
+        if counter == 10:
+            print("redirect larger than 10", file=sys.stderr)
+            return None
         else:
-            dict[url]["hsts"] = False
+            if "Strict-Transport-Security" in r.headers:
+                dict[url]["hsts"] = True
+            else:
+                dict[url]["hsts"] = False
     except Exception as e:
         print(e, file=sys.stderr)
         return None
