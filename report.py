@@ -14,7 +14,7 @@ def report(input, output):
     f = open(input, "r")
     dict = json.load(f)
     output_f = open(output, "w")
-    output_f.write(information(dict)+rtt(dict)+root_ca(dict)+web_server(dict))
+    output_f.write(information(dict)+rtt(dict)+root_ca(dict)+web_server(dict)+percentage(dict))
     output_f.close()
 
 def sort_tuple_list(l):
