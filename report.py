@@ -36,7 +36,7 @@ def rtt(dict):
     domains = list(dict.keys())
     rtt = {}
     for d in domains:
-        if "rtt_range" in list(dict[d].keys()):
+        if "rtt_range" in list(dict[d].keys()) and dict[d]["rtt_range"][0] != None:
             rtt[d] = dict[d]["rtt_range"]
     table.set_cols_align(align)
     table.set_cols_valign(valign)
